@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuana Merve Karataş - Portfolyo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .portfolio-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .title {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .profile-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+
+        .skill-category h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 0.5rem 1rem;
+            margin: 0.3rem 0;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .education-item, .experience-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 15px;
+            border-left: 5px solid #e74c3c;
+            transition: all 0.3s ease;
+        }
+
+        .education-item:hover, .experience-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .education-title, .experience-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-institution, .experience-company {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .education-period, .experience-period {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .languages {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .language-item {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .language-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .certificates {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .certificate-item {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .certificate-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .languages {
+                justify-content: center;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="portfolio-card">
+            <div class="header">
+                <div class="header-content">
+                    <h1 class="name">TUANA MERVE KARATAŞ</h1>
+                    <p class="title">Bilgisayar Programcılığı Öğrencisi</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>📧</span>
+                            <span>m.t.karatas2004@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>📱</span>
+                            <span>0551 159 99 90</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>📍</span>
+                            <span>Ankara, Sincan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <section class="section">
+                    <h2 class="section-title">PROFİL</h2>
+                    <div class="profile-text">
+                        Bilgisayar Programcılığı son sınıf öğrencisiyim. Kariyer odaklı, işini ciddiye alan ve hızla adapte olabilen, yenilikçi bir yapıya sahibim. Takım çalışmalarında etkin rol alır, etkili yazılı ve sözlü iletişim becerilerimle uyumlu bir iş ortamı oluştururum. Aynı zamanda bireysel çalışmalarımda da yüksek verimlilikle hareket ederim. İkna kabiliyetim ve enerjik çalışma prensibim sayesinde yüksek tempolu ortamlara çok çabuk uyum sağlarım. Empati yeteneğimle de problemlerin kolay bir şekilde çözülmesine yardımcı olurum. Sürekli kendimi geliştirerek alanımda en iyi olmak benim hedefimdir.
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">BECERİLER</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Programlama Dilleri</h3>
+                            <div class="skill-item">Java</div>
+                            <div class="skill-item">C#</div>
+                            <div class="skill-item">Python</div>
+                            <div class="skill-item">HTML & CSS</div>
+                            <div class="skill-item">PHP</div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Teknik Beceriler</h3>
+                            <div class="skill-item">Microsoft Office Yetkinliği</div>
+                            <div class="skill-item">Veritabanı Yönetimi</div>
+                            <div class="skill-item">Program Kullanabilme</div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Kişisel Beceriler</h3>
+                            <div class="skill-item">Takım Çalışması</div>
+                            <div class="skill-item">Analitik Düşünme</div>
+                            <div class="skill-item">İnovatif Yaklaşım</div>
+                            <div class="skill-item">Liderlik</div>
+                            <div class="skill-item">Detaylara Önem Verme</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">EĞİTİM</h2>
+                    <div class="education-item">
+                        <h3 class="education-title">Bilgisayar Programcılığı</h3>
+                        <div class="education-institution">Amasya Üniversitesi</div>
+                        <div class="education-period">2023 - 2025</div>
+                        <div style="margin-top: 0.5rem; color: #27ae60; font-weight: 600;">Başarı Oranı: %85</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">İŞ DENEYİMLERİ</h2>
+                    <div class="experience-item">
+                        <h3 class="experience-title">DK Danışmanlık</h3>
+                        <div class="experience-company">Platform Çalışmaları</div>
+                        <div class="experience-period">Kartvizit, Logo Tasarımı, Devam Eden Platform Çalışmaları</div>
+                    </div>
+                    <div class="experience-item">
+                        <h3 class="experience-title">Ankateks Turizm İnşaat Tekstil</h3>
+                        <div class="experience-company">Temizleme Sanayi ve Ticaret A.Ş</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">DİLLER</h2>
+                    <div class="languages">
+                        <div class="language-item">İngilizce</div>
+                        <div class="language-item">Almanca</div>
+                        <div class="language-item">Korece</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">SERTİFİKALAR & EĞİTİMLER</h2>
+                    <div class="certificates">
+                        <div class="certificate-item">
+                            <strong>Code Sprint</strong> - %48 Başarı Oranı
+                        </div>
+                        <div class="certificate-item">
+                            <strong>HR Leadership Summit</strong> - %33 Başarı Oranı
+                        </div>
+                        <div class="certificate-item">
+                            <strong>Global Executive Academy</strong> - %20 Başarı Oranı
+                        </div>
+                        <div class="certificate-item">
+                            <strong>Devam Eden Eğitimler</strong> - Sürekli Gelişim
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling animation for sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'all 0.6s ease-out';
+            observer.observe(section);
+        });
+
+        // Interactive hover effects
+        document.querySelectorAll('.skill-item, .language-item, .certificate-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) rotate(1deg)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+    </script>
+</body>
+</html>
